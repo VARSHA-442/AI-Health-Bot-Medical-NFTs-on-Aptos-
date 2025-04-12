@@ -12,7 +12,7 @@ import string
 from utils.metagenerator import upload_metadata
 from cryptography.fernet import Fernet
 import uuid
-
+from datetime import time
 # Configure Gemini API Key
 genai.configure(api_key="AIzaSyCNcDqBuahNOVuu7m20r--UKshLYz9uEnk")
 
@@ -132,30 +132,14 @@ if user_input:
             result = predict_disease(model, input_vector)
             symptoms=extract_detected_symptoms(symptom_list, input_vector)
             recommendation=generateSuggestion(symptoms,result)
+            summary = generate_medical_summary(symptoms,result,recommendation)
+
             
-
-           
-
-# Step 1: Generate encryption key (do once)
-            key = Fernet.generate_key()
-            fernet = Fernet(key)
-
-# Step 2: Your raw summary (from AI)
-            summary = {
-                "patient_id": str(uuid.uuid4()),
-                "symptoms": symptoms,
-                "diagnosis": result,
-                "date": str(date.today())
-            }
-
-# Convert to JSON string and encrypt
             summary_json = json.dumps(summary)
-            encrypted_summary = fernet.encrypt(summary_json.encode()).decode()
-            st.success("🔐 Prediction encrypted successfully!")
+            
+            st.success("summary")
 
-            with open(encrypted_summary, "rb") as f:
-                st.download_button("📥 Download Encrypted Prediction", f.read(), file_name="prediction_encrypted.txt")
-
+            
             # with open(key_file, "rb") as kf:
             #     st.download_button("🔑 Download Key File", kf.read(), file_name="key.txt")
 
