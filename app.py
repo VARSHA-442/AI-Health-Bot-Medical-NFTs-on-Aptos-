@@ -135,7 +135,7 @@ if st.button("🔍 Predict Disease"):
             
         summary_json = json.dumps(summary)
             
-        st.success("summary")
+        st.success(summary)
 
             
             # with open(key_file, "rb") as kf:
