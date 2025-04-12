@@ -138,7 +138,7 @@ if st.button("🔍 Predict Disease"):
     else:
         result = predict_disease(model, input_vector)
         symptoms=extract_detected_symptoms(symptom_list, input_vector)
-        if st.checkbox("I need suggestion"):
+        if st.button("I need suggestion"):
             recommendation=generateSuggestion(symptoms,result)
             st.markdown(recommendation)
         summary = generate_medical_summary(symptoms,result)
