@@ -81,7 +81,7 @@ def generate_medical_summary(symptoms, diagnosis, recommendation):
         "date": datetime.now().strftime("%Y-%m-%d"),
         "symptoms": symptoms,
         "diagnosis": diagnosis,
-        "recommendation": (recommendation)
+        "recommendation": recommendation
     }
 
     # 🔹 Convert to JSON (for saving or printing)
