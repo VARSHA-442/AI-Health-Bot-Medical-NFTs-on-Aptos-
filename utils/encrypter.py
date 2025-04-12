@@ -1,6 +1,9 @@
 from cryptography.fernet import Fernet
 
 def generate_encrypted_file(summary_text, output_path="encrypt.txt", key_path="key.txt"):
+    if not summary_text:
+        raise ValueError("summary_text is empty or None. Cannot encrypt empty content.")
+
     key = Fernet.generate_key()
     cipher = Fernet(key)
 
