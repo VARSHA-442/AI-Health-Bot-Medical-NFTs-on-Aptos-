@@ -150,8 +150,8 @@ if st.button("🔍 Predict Disease"):
         #         else:
         #             st.error("❌ Failed to upload to IPFS.")
 
-       if 'uploaded' not in st.session_state:
-            st.session_state.uploaded = False
+            if 'uploaded' not in st.session_state:
+                st.session_state.uploaded = False
 
             try:
                 if st.button("🌐 Upload File to IPFS"):
