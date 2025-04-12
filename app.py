@@ -141,15 +141,6 @@ if st.button("🔍 Predict Disease"):
             # with open(key_file, "rb") as kf:
             #     st.download_button("🔑 Download Key File", kf.read(), file_name="key.txt")
 
-            # Upload to IPFS
-        # if st.button("🌐 Upload File to IPFS"):
-        #         ipfs_hash = upload_to_pinata(summary_json)
-        #         if ipfs_hash:
-        #             st.success("✅ Uploaded to IPFS!")
-        #             st.markdown(f"[🔗 View on IPFS](https://gateway.pinata.cloud/ipfs/{ipfs_hash})")
-        #         else:
-        #             st.error("❌ Failed to upload to IPFS.")
-
 if st.button("🌐 Upload File to IPFS"):
     st.session_state.upload_clicked = True
 
