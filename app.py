@@ -71,7 +71,7 @@ def load_model():
         model = pickle.load(model_file)
     return model
 
-def generate_medical_summary(symptoms, diagnosis, recommendation):
+def generate_medical_summary(symptoms, diagnosis):
     # 🔹 Generate unique patient ID with timestamp + random 4-char suffix
     suffix = ''.join(random.choices(string.ascii_lowercase + string.digits, k=4))
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -83,7 +83,6 @@ def generate_medical_summary(symptoms, diagnosis, recommendation):
         "date": datetime.now().strftime("%Y-%m-%d"),
         "symptoms": symptoms,
         "diagnosis": diagnosis,
-        "recommendation": recommendation
     }
 
     # 🔹 Convert to JSON (for saving or printing)
@@ -139,8 +138,9 @@ if st.button("🔍 Predict Disease"):
     else:
         result = predict_disease(model, input_vector)
         symptoms=extract_detected_symptoms(symptom_list, input_vector)
-        recommendation=generateSuggestion(symptoms,result)
-        summary = generate_medical_summary(symptoms,result,recommendation)
+        if st.checkbox("I need suggestion"):
+            recommendation=generateSuggestion(symptoms,result)
+        summary = generate_medical_summary(symptoms,result)
 
             
         summary_json = json.dumps(summary)
