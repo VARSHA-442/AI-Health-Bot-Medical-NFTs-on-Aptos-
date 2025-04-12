@@ -1,7 +1,7 @@
 import requests
 
-PINATA_API_KEY = "9a17fbd24197fae05247"
-PINATA_SECRET_API_KEY = "dbcf4aad6f2f69a99e66aefe0bf32f6f5f64aefe5e9716d728b2b9df130eb5a3"
+PINATA_API_KEY = "3755c3257b00533236bf"
+PINATA_SECRET_API_KEY = "3c57c5293975a54eb3d7d0e71e07ef69f4c991e269698ac9bae99810155a891b"
 
 def upload_to_pinata(file_path):
     url = "https://api.pinata.cloud/pinning/pinFileToIPFS"

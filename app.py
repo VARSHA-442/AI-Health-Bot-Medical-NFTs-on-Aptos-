@@ -153,7 +153,7 @@ if user_input:
                     st.markdown(f"[🔗 View on IPFS](https://gateway.pinata.cloud/ipfs/{ipfs_hash})")
                 else:
                     st.error("❌ Failed to upload to IPFS.")
-            PINATA_API_KEY = "9a17fbd24197fae05247"
-            PINATA_SECRET_API_KEY = "dbcf4aad6f2f69a99e66aefe0bf32f6f5f64aefe5e9716d728b2b9df130eb5a3"
+            PINATA_API_KEY = "3755c3257b00533236bf"
+            PINATA_SECRET_API_KEY = "3c57c5293975a54eb3d7d0e71e07ef69f4c991e269698ac9bae99810155a891b"
             metadata_url = upload_metadata("encrypt.txt",PINATA_API_KEY,PINATA_SECRET_API_KEY)
             print("✅ Metadata IPFS URL:",metadata_url)
