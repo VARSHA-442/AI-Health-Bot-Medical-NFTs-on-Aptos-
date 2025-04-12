@@ -109,7 +109,7 @@ def predict_disease(model, input_vector):
 
 
 # Streamlit UI
-st.title("🩺 AI Health Bot - Disease Prediction System")
+st.title("🩺 AI Health Bot + Medical NFTs on Aptos")
 
 mode = st.radio("Choose input mode", ("Audio", "Text"))
 
@@ -122,20 +122,20 @@ if user_input:
     tokens = preprocess_text(user_input)
     input_vector = create_input_vector(tokens)
 
-    if st.button("🔍 Predict Disease"):
-        model = load_model()
-        if len(input_vector) != model.n_features_in_:
-            st.error(f"❌ Model expects {model.n_features_in_} features, but got {len(input_vector)}. Please check symptom list.")
-        else:
-            result = predict_disease(model, input_vector)
-            symptoms=extract_detected_symptoms(symptom_list, input_vector)
-            recommendation=generateSuggestion(symptoms,result)
-            summary = generate_medical_summary(symptoms,result,recommendation)
+if st.button("🔍 Predict Disease"):
+    model = load_model()
+    if len(input_vector) != model.n_features_in_:
+        st.error(f"❌ Model expects {model.n_features_in_} features, but got {len(input_vector)}. Please check symptom list.")
+    else:
+        result = predict_disease(model, input_vector)
+        symptoms=extract_detected_symptoms(symptom_list, input_vector)
+        recommendation=generateSuggestion(symptoms,result)
+        summary = generate_medical_summary(symptoms,result,recommendation)
 
             
-            summary_json = json.dumps(summary)
+        summary_json = json.dumps(summary)
             
-            st.success("summary")
+        st.success("summary")
 
             
             # with open(key_file, "rb") as kf:
