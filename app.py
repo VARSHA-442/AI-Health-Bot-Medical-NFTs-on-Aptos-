@@ -142,13 +142,32 @@ if st.button("🔍 Predict Disease"):
             #     st.download_button("🔑 Download Key File", kf.read(), file_name="key.txt")
 
             # Upload to IPFS
+        # if st.button("🌐 Upload File to IPFS"):
+        #         ipfs_hash = upload_to_pinata(summary_json)
+        #         if ipfs_hash:
+        #             st.success("✅ Uploaded to IPFS!")
+        #             st.markdown(f"[🔗 View on IPFS](https://gateway.pinata.cloud/ipfs/{ipfs_hash})")
+        #         else:
+        #             st.error("❌ Failed to upload to IPFS.")
+
+        if 'uploaded' not in st.session_state:
+            st.session_state.uploaded = False
+
         if st.button("🌐 Upload File to IPFS"):
+            with st.spinner("Uploading to IPFS..."):
                 ipfs_hash = upload_to_pinata(summary_json)
                 if ipfs_hash:
-                    st.success("✅ Uploaded to IPFS!")
-                    st.markdown(f"[🔗 View on IPFS](https://gateway.pinata.cloud/ipfs/{ipfs_hash})")
+                    st.session_state.uploaded = True
+                    st.session_state.ipfs_hash = ipfs_hash
                 else:
+                    st.session_state.uploaded = False
                     st.error("❌ Failed to upload to IPFS.")
+
+# Show result after upload
+        if st.session_state.uploaded:
+            st.success("✅ Uploaded to IPFS!")
+            st.markdown(f"[🔗 View on IPFS](https://gateway.pinata.cloud/ipfs/{st.session_state.ipfs_hash})")
+
 
 if st.button("🧬 Mint Health Summary NFT"):
     wallet_address = st.text_input("0x9763f9cfc426c92165b14d6bd2621ce10f139ebb728fc0fcc85cec51ff5b9d4a")
