@@ -140,7 +140,7 @@ if st.button("🔍 Predict Disease"):
         symptoms=extract_detected_symptoms(symptom_list, input_vector)
         if st.checkbox("I need suggestion"):
             recommendation=generateSuggestion(symptoms,result)
-            st.dialog(recommendation)
+            st.markdown(recommendation)
         summary = generate_medical_summary(symptoms,result)
 
             
