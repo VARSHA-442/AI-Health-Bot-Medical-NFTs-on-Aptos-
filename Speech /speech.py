@@ -61,7 +61,6 @@ def audio_input():
 # Function to get text input
 def text_input():
     user_input = input("Enter your text here: ")
-    print("You typed:", user_input)
     return user_input
 
 # Choose input mode
