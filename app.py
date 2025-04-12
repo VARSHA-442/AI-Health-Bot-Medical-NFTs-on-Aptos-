@@ -81,11 +81,13 @@ def generate_medical_summary(symptoms, diagnosis, recommendation):
         "date": datetime.now().strftime("%Y-%m-%d"),
         "symptoms": symptoms,
         "diagnosis": diagnosis,
-        "recommendation": recommendation
+        "recommendation": (recommendation)
     }
 
     # 🔹 Convert to JSON (for saving or printing)
-    summary_json = json.dumps(summary, indent=4)
+    # summary_json = json.dumps(summary, indent=4)
+    with open("diagnosis_result.json", "w") as f:
+        json.dump(summary, f, indent=4)
 
     return summary, summary_json
 
