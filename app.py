@@ -9,10 +9,8 @@ import google.generativeai as genai
 import random
 import json
 import string
-from utils.metagenerator import upload_metadata
-from cryptography.fernet import Fernet
-import uuid
 from datetime import datetime
+from utils.mint_nft import mint_nft_to_patron
 # Configure Gemini API Key
 genai.configure(api_key="AIzaSyCNcDqBuahNOVuu7m20r--UKshLYz9uEnk")
 
@@ -152,6 +150,17 @@ if user_input:
                 else:
                     st.error("❌ Failed to upload to IPFS.")
 
+if st.button("🧬 Mint Health Summary NFT"):
+    wallet_address = st.text_input("0x9763f9cfc426c92165b14d6bd2621ce10f139ebb728fc0fcc85cec51ff5b9d4a")
+    if wallet_address:
+        result = mint_nft_to_patron(ipfs_hash, wallet_address)
+        if result.get("success"):
+            st.success("✅ NFT minted successfully!")
+            st.markdown(f"[View NFT on Aptos Explorer](https://explorer.aptoslabs.com/account/{wallet_address})")
+        else:
+            st.error("❌ Failed to mint NFT")
+    else:
+        st.warning("Please enter your wallet address.")
 
 # import streamlit as st
 # import google.generativeai as genai
