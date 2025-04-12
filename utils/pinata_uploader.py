@@ -1,17 +1,6 @@
 import requests
 from cryptography.fernet import Fernet
-
-summary_text = "This is the health summary to encrypt."  # Replace with actual summary
-encrypt_file, key_file = generate_encrypted_file(summary_text)
-
-# Read the key
-with open(key_file, "rb") as key_file:
-    key = key_file.read()
-
-cipher = Fernet(key)
-
-with open(encrypt_file, "rb") as file:
-    encrypted_summary = file.read()
+  # Replace with actual summary
 
 
 PINATA_API_KEY = "9a17fbd24197fae05247"
@@ -32,6 +21,3 @@ def upload_to_pinata(file_path):
     else:
         print("❌ Failed to upload:", response.text)
         return None
-
-# Upload to IPFS
-upload_to_pinata(encrypt_file)
