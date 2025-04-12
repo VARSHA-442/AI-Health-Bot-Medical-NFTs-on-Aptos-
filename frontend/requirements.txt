@@ -1,0 +1,6 @@
+SpeechRecognition
+streamlit
+pandas
+scikit-learn
+nltk
+cryptography
