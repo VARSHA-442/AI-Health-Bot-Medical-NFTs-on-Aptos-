@@ -154,5 +154,5 @@ if user_input:
                 else:
                     st.error("❌ Failed to upload to IPFS.")
 
-            metadata_url = upload_metadata(enc_file)
+            metadata_url = upload_metadata("encrypt.txt")
             print("✅ Metadata IPFS URL:",metadata_url)
