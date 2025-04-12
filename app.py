@@ -62,7 +62,7 @@ def load_model():
         model = pickle.load(model_file)
     return model
 
-def generateSummary(userinput,prediction):
+def generateSuggestion(userinput,prediction):
     prompt = f"""
     A user reported the following symptoms: "{userinput}".
     The AI model predicted the following condition: "{prediction}".
@@ -100,8 +100,9 @@ if user_input:
             st.error(f"❌ Model expects {model.n_features_in_} features, but got {len(input_vector)}. Please check symptom list.")
         else:
             result = predict_disease(model, input_vector)
-            suggestion=generateSummary(input_vector,result)
-            st.markdown(f"### 🧠 Prediction Result: {suggestion}")
+            if st.checkbox("I want Suggestion")
+                suggestion=generateSuggestion(input_vector,result)
+                st.markdown(f"🧠 Suggestion: {suggestion}")
             
 
             # Encrypt result
