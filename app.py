@@ -11,6 +11,8 @@ import json
 import string
 from datetime import datetime
 from utils.mint_nft import mint_nft_to_patron
+import tempfile
+
 # Configure Gemini API Key
 genai.configure(api_key="AIzaSyCNcDqBuahNOVuu7m20r--UKshLYz9uEnk")
 
@@ -108,6 +110,12 @@ def predict_disease(model, input_vector):
         return "The symptoms suggest: No disease detected."
     else:
         return f"The symptoms suggest: Disease detected. (Class {prediction[0]})"
+def upload_summary(summary_json):
+    # Ensure it's a dict
+    if isinstance(summary_json, str):
+        summary_data = json.loads(summary_json)
+    else:
+        summary_data = summary_json
 
 
 # Streamlit UI
@@ -138,6 +146,9 @@ if st.button("🔍 Predict Disease"):
         summary_json = json.dumps(summary)
             
         st.success(summary)
+        with tempfile.NamedTemporaryFile(delete=False, mode="w", suffix=".json") as tmp:
+            json.dump(summary, tmp, indent=4)
+            tmp_path = tmp.name
 
             
             # with open(key_file, "rb") as kf:
