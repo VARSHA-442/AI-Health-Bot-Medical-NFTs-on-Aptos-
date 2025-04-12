@@ -11,6 +11,8 @@ import json
 import string
 from datetime import datetime
 from utils.metagenerator import upload_metadata
+from cryptography.fernet import Fernet
+import uuid
 
 # Configure Gemini API Key
 genai.configure(api_key="AIzaSyCNcDqBuahNOVuu7m20r--UKshLYz9uEnk")
@@ -135,8 +137,23 @@ if user_input:
             summary=generate_medical_summary(symptoms,result,recommendation)
             
 
-            # Encrypt result
-            enc_file= generate_encrypted_file(summary[0])
+           
+
+# Step 1: Generate encryption key (do once)
+            key = Fernet.generate_key()
+            fernet = Fernet(key)
+
+# Step 2: Your raw summary (from AI)
+            summary = {
+                "patient_id": str(uuid.uuid4()),
+                "symptoms": ["fever", "cough", "fatigue"],
+                "diagnosis": "Suspected Viral Fever",
+                "date": str(datetime.date.today())
+            }
+
+# Convert to JSON string and encrypt
+            summary_json = json.dumps(summary)
+            encrypted_summary = fernet.encrypt(summary_json.encode()).decode()
             st.success("🔐 Prediction encrypted successfully!")
 
             with open(enc_file, "rb") as f:
@@ -153,7 +170,4 @@ if user_input:
                     st.markdown(f"[🔗 View on IPFS](https://gateway.pinata.cloud/ipfs/{ipfs_hash})")
                 else:
                     st.error("❌ Failed to upload to IPFS.")
-            PINATA_API_KEY = "3755c3257b00533236bf"
-            PINATA_SECRET_API_KEY = "3c57c5293975a54eb3d7d0e71e07ef69f4c991e269698ac9bae99810155a891b"
-            metadata_url = upload_metadata(enc_file,PINATA_API_KEY,PINATA_SECRET_API_KEY)
-            print("✅ Metadata IPFS URL:",metadata_url)
+           
