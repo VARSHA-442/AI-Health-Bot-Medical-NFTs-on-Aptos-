@@ -12,7 +12,7 @@ import string
 from utils.metagenerator import upload_metadata
 from cryptography.fernet import Fernet
 import uuid
-from datetime import time
+from datetime import datetime
 # Configure Gemini API Key
 genai.configure(api_key="AIzaSyCNcDqBuahNOVuu7m20r--UKshLYz9uEnk")
 
@@ -145,7 +145,7 @@ if user_input:
 
             # Upload to IPFS
             if st.button("🌐 Upload Encrypted File to IPFS"):
-                ipfs_hash = upload_to_pinata(enc_file)
+                ipfs_hash = upload_to_pinata(summary_json)
                 if ipfs_hash:
                     st.success("✅ Uploaded to IPFS!")
                     st.markdown(f"[🔗 View on IPFS](https://gateway.pinata.cloud/ipfs/{ipfs_hash})")
@@ -240,13 +240,13 @@ if user_input:
 #         response = model.generate_content(user_input)
 #         st.write(response)
 
-Mintdata = st.checkbox("Mintdata")
-if Mintdata:
-    # Replace this with your actual minting code
-    st.write("🪙 Minting started...")
-    encrypt_file, key_file = generate_encrypted_file(disease)
-    st.success("✅ Encryption complete!")
-    st.write(f"Encrypted file saved as: {encrypt_file}")
-    st.write(f"Key saved as: {key_file}")
-else:
-    st.stop()
+# Mintdata = st.checkbox("Mintdata")
+# if Mintdata:
+#     # Replace this with your actual minting code
+#     st.write("🪙 Minting started...")
+#     encrypt_file, key_file = generate_encrypted_file(disease)
+#     st.success("✅ Encryption complete!")
+#     st.write(f"Encrypted file saved as: {encrypt_file}")
+#     st.write(f"Key saved as: {key_file}")
+# else:
+#     st.stop()
