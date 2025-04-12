@@ -134,7 +134,6 @@ if user_input:
             result = predict_disease(model, input_vector)
             symptoms=extract_detected_symptoms(symptom_list, input_vector)
             recommendation=generateSuggestion(symptoms,result)
-            summary=generate_medical_summary(symptoms,result,recommendation)
             
 
            
@@ -146,8 +145,8 @@ if user_input:
 # Step 2: Your raw summary (from AI)
             summary = {
                 "patient_id": str(uuid.uuid4()),
-                "symptoms": ["fever", "cough", "fatigue"],
-                "diagnosis": "Suspected Viral Fever",
+                "symptoms": symptoms,
+                "diagnosis": result,
                 "date": str(datetime.date.today())
             }
 
@@ -156,7 +155,7 @@ if user_input:
             encrypted_summary = fernet.encrypt(summary_json.encode()).decode()
             st.success("🔐 Prediction encrypted successfully!")
 
-            with open(enc_file, "rb") as f:
+            with open(encrypted_summary, "rb") as f:
                 st.download_button("📥 Download Encrypted Prediction", f.read(), file_name="prediction_encrypted.txt")
 
             # with open(key_file, "rb") as kf:
