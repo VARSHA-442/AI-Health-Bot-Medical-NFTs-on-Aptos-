@@ -22,8 +22,9 @@ def create_metadata_json(ipfs_url, file_hash):
     with open("metadata.json", "w") as f:
         json.dump(metadata, f, indent=4)
     return "metadata.json"
-
-def upload_metadata(encrypted_file_path, api_key, secret_key):
+PINATA_API_KEY = "9a17fbd24197fae05247"
+PINATA_SECRET = "dbcf4aad6f2f69a99e66aefe0bf32f6f5f64aefe5e9716d728b2b9df130eb5a3y"
+def upload_metadata(encrypted_file_path, api_key=PINATA_API_KEY, secret_key=PINATA_SECRET):
     file_hash = get_sha256(encrypted_file_path)
     file_ipfs_url = upload_to_pinata(encrypted_file_path, api_key, secret_key)
     if not file_ipfs_url:

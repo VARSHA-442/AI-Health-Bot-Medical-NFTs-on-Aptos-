@@ -14,7 +14,6 @@ def upload_to_pinata(file_path):
 
     if response.status_code == 200:
         ipfs_hash = response.json()["IpfsHash"]
-        print(f"✅ Uploaded to IPFS: https://gateway.pinata.cloud/ipfs/{ipfs_hash}")
         return ipfs_hash
     else:
         print("❌ Failed to upload:", response.text)
