@@ -5,6 +5,10 @@ import time
 from nltk.stem import WordNetLemmatizer
 import nltk
 from nltk.corpus import stopwords
+import google.generativeai as genai
+
+# Configure Gemini API Key
+genai.configure(api_key="AIzaSyCNcDqBuahNOVuu7m20r--UKshLYz9uEnk")
 
 # Custom utility imports
 from utils.encrypter import generate_encrypted_file
@@ -58,6 +62,17 @@ def load_model():
         model = pickle.load(model_file)
     return model
 
+def generateSummary(userinput,prediction):
+    prompt = f"""
+    A user reported the following symptoms: "{userinput}".
+    The AI model predicted the following condition: "{prediction}".
+    
+    Provide first-aid suggestions based on the predicted condition. The suggestions should be general advice that can be safely followed before seeking medical attention.
+    """
+    model = genai.GenerativeModel("gemini-1.5-flash")
+    response = model.generate_content(prompt)
+    return response.text if response else "No itinerary generated."
+
 def predict_disease(model, input_vector):
     prediction = model.predict([input_vector])
     if prediction == 0:
@@ -85,7 +100,9 @@ if user_input:
             st.error(f"❌ Model expects {model.n_features_in_} features, but got {len(input_vector)}. Please check symptom list.")
         else:
             result = predict_disease(model, input_vector)
-            st.markdown(f"### 🧠 Prediction Result: {result}")
+            suggestion=generateSummary(input_vector,result)
+            st.markdown(f"### 🧠 Prediction Result: {suggestion}")
+            
 
             # Encrypt result
             enc_file, key_file = generate_encrypted_file(result)
