@@ -41,8 +41,6 @@ def audio_input():
 
 def text_input():
     user_input = st.text_area("✍ Enter your symptoms here:")
-    if user_input:
-        st.write("You typed:", user_input)
     return user_input
 
 def preprocess_text(text):
