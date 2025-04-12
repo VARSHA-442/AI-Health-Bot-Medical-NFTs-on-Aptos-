@@ -136,14 +136,14 @@ if user_input:
             
 
             # Encrypt result
-            enc_file, key_file = generate_encrypted_file(summary[1])
+            enc_file= generate_encrypted_file(summary[1])
             st.success("🔐 Prediction encrypted successfully!")
 
             with open(enc_file, "rb") as f:
                 st.download_button("📥 Download Encrypted Prediction", f.read(), file_name="prediction_encrypted.txt")
 
-            with open(key_file, "rb") as kf:
-                st.download_button("🔑 Download Key File", kf.read(), file_name="key.txt")
+            # with open(key_file, "rb") as kf:
+            #     st.download_button("🔑 Download Key File", kf.read(), file_name="key.txt")
 
             # Upload to IPFS
             if st.button("🌐 Upload Encrypted File to IPFS"):
