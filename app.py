@@ -173,7 +173,7 @@ import streamlit as st
 import google.generativeai as genai
 import random
 import datetime
-#from encrypt import generate_encrypted_file
+from utils.encrypter import generate_encrypted_file
 
 genai.configure(api_key="AIzaSyCNcDqBuahNOVuu7m20r--UKshLYz9uEnk")
 
