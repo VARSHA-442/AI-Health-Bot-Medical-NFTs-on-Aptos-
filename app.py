@@ -17,8 +17,7 @@ import uuid
 # Configure Gemini API Key
 genai.configure(api_key="AIzaSyCNcDqBuahNOVuu7m20r--UKshLYz9uEnk")
 
-# Custom utility imports
-from utils.encrypter import generate_encrypted_file
+
 from utils.pinata_uploader import upload_to_pinata
 
 # Ensure necessary NLTK data is downloaded
