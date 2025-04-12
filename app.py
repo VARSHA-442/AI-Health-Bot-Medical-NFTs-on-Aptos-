@@ -145,7 +145,7 @@ if user_input:
                 "patient_id": str(uuid.uuid4()),
                 "symptoms": symptoms,
                 "diagnosis": result,
-                "date": str(datetime.date.today())
+                "date": str(date.today())
             }
 
 # Convert to JSON string and encrypt
