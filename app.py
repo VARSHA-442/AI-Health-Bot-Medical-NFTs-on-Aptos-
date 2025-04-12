@@ -134,7 +134,7 @@ if user_input:
             
 
             # Encrypt result
-            enc_file, key_file = generate_encrypted_file(summary)
+            enc_file, key_file = generate_encrypted_file(summary[1])
             st.success("🔐 Prediction encrypted successfully!")
 
             with open(enc_file, "rb") as f:
