@@ -67,7 +67,7 @@ def generateSummary(userinput,prediction):
     A user reported the following symptoms: "{userinput}".
     The AI model predicted the following condition: "{prediction}".
     
-    Provide first-aid suggestions based on the predicted condition. The suggestions should be general advice that can be safely followed before seeking medical attention.
+    Provide first-aid suggestions based on the predicted condition. The suggestions should be general advice that can be safely followed before seeking medical attention in 2 to 3 lines.
     """
     model = genai.GenerativeModel("gemini-1.5-flash")
     response = model.generate_content(prompt)
