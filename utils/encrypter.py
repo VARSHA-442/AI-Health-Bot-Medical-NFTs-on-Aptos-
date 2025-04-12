@@ -1,5 +1,4 @@
 from cryptography.fernet import Fernet
-from app import generate_summary
 
 from cryptography.fernet import Fernet
 
