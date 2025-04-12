@@ -150,24 +150,24 @@ if st.button("🔍 Predict Disease"):
         #         else:
         #             st.error("❌ Failed to upload to IPFS.")
 
-            if 'uploaded' not in st.session_state:
-                st.session_state.uploaded = False
+        if 'uploaded' not in st.session_state:
+            st.session_state.uploaded = False
 
-            try:
-                if st.button("🌐 Upload File to IPFS"):
-                    st.write("🟡 Button clicked")
-                    with st.spinner("Uploading to IPFS..."):
-                        ipfs_hash = upload_to_pinata(summary_json)
-                        if ipfs_hash:
-                            st.session_state.uploaded = True
-                            st.session_state.ipfs_hash = ipfs_hash
-                        else:
-                            st.session_state.uploaded = False
-                            st.error("❌ Failed to upload to IPFS.")
-            except Exception as e:
-                st.error(f"❌ Exception occurred: {e}")
-                import traceback
-                st.text(traceback.format_exc())
+        try:
+            if st.button("🌐 Upload File to IPFS"):
+                st.write("🟡 Button clicked")
+                with st.spinner("Uploading to IPFS..."):
+                    ipfs_hash = upload_to_pinata(summary_json)
+                    if ipfs_hash:
+                        st.session_state.uploaded = True
+                        st.session_state.ipfs_hash = ipfs_hash
+                    else:
+                        st.session_state.uploaded = False
+                        st.error("❌ Failed to upload to IPFS.")
+        except Exception as e:
+            st.error(f"❌ Exception occurred: {e}")
+            import traceback
+            st.text(traceback.format_exc())
 
 
 if st.button("🧬 Mint Health Summary NFT"):
