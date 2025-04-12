@@ -100,7 +100,7 @@ if user_input:
             st.error(f"❌ Model expects {model.n_features_in_} features, but got {len(input_vector)}. Please check symptom list.")
         else:
             result = predict_disease(model, input_vector)
-            if st.checkbox("I want Suggestion")
+            if st.checkbox("I want Suggestion"):
                 suggestion=generateSuggestion(input_vector,result)
                 st.markdown(f"🧠 Suggestion: {suggestion}")
             
