@@ -144,6 +144,7 @@ if st.button("🔍 Predict Disease"):
             # Upload to IPFS
         if st.button("🌐 Upload File to IPFS"):
                 ipfs_hash = upload_to_pinata(summary_json)
+                print("hi")
                 if ipfs_hash:
                     st.success("✅ Uploaded to IPFS!")
                     st.markdown(f"[🔗 View on IPFS](https://gateway.pinata.cloud/ipfs/{ipfs_hash})")
