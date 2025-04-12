@@ -108,6 +108,7 @@ def predict_disease(model, input_vector):
     else:
         return f"The symptoms suggest: Disease detected. (Class {prediction[0]})"
 
+
 # Streamlit UI
 st.title("🩺 AI Health Bot - Disease Prediction System")
 
