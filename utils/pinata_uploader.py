@@ -1,6 +1,5 @@
 import requests
 from cryptography.fernet import Fernet
-from utils.encrypter import generate_encrypted_file
 
 summary_text = "This is the health summary to encrypt."  # Replace with actual summary
 encrypt_file, key_file = generate_encrypted_file(summary_text)
