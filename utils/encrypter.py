@@ -24,7 +24,7 @@ def generate_encrypted_file(summary_text, output_path="encrypt.txt", key_path="k
 
 
 # Example usage
-if _name_ == "_main_":
+if __name__ == "__main__":
     # This is where you get the summary from (model output or user input)
     summary = "This is a demo medical summary for encryption."  # Replace this with your actual summary logic
 
