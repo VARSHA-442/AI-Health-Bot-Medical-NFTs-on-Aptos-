@@ -6,6 +6,10 @@ from nltk.stem import WordNetLemmatizer
 import nltk
 from nltk.corpus import stopwords
 import google.generativeai as genai
+import random
+import json
+import string
+from datetime import datetime
 
 # Configure Gemini API Key
 genai.configure(api_key="AIzaSyCNcDqBuahNOVuu7m20r--UKshLYz9uEnk")
@@ -57,10 +61,34 @@ def preprocess_text(text):
 def create_input_vector(tokens):
     return [1 if symptom in tokens else 0 for symptom in symptom_list]
 
+def extract_detected_symptoms(symptom_list, input_vector):
+    detected = [symptom_list[i] for i in range(len(symptom_list)) if input_vector[i] == 1]
+    return detected
+
 def load_model():
     with open('model.pkl', 'rb') as model_file:
         model = pickle.load(model_file)
     return model
+
+def generate_medical_summary(symptoms, diagnosis, recommendation):
+    # 🔹 Generate unique patient ID with timestamp + random 4-char suffix
+    suffix = ''.join(random.choices(string.ascii_lowercase + string.digits, k=4))
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    patient_id = f"user_{timestamp}_{suffix}"
+
+    # 🔹 Create summary dictionary
+    summary = {
+        "patient_id": patient_id,
+        "date": datetime.now().strftime("%Y-%m-%d"),
+        "symptoms": symptoms,
+        "diagnosis": diagnosis,
+        "recommendation": recommendation
+    }
+
+    # 🔹 Convert to JSON (for saving or printing)
+    summary_json = json.dumps(summary, indent=4)
+
+    return summary, summary_json
 
 def generateSuggestion(userinput,prediction):
     prompt = f"""
@@ -100,13 +128,13 @@ if user_input:
             st.error(f"❌ Model expects {model.n_features_in_} features, but got {len(input_vector)}. Please check symptom list.")
         else:
             result = predict_disease(model, input_vector)
-            if st.checkbox("I want Suggestion"):
-                suggestion=generateSuggestion(input_vector,result)
-                st.markdown(f"🧠 Suggestion: {suggestion}")
+            symptoms=extract_detected_symptoms(symptom_list, input_vector)
+            recommendation=generateSuggestion(symptoms,result)
+            summary=generate_medical_summary(symptoms,result,recommendation)
             
 
             # Encrypt result
-            enc_file, key_file = generate_encrypted_file(result)
+            enc_file, key_file = generate_encrypted_file(summary)
             st.success("🔐 Prediction encrypted successfully!")
 
             with open(enc_file, "rb") as f:
