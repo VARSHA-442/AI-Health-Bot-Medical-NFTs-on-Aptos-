@@ -10,6 +10,7 @@ import random
 import json
 import string
 from datetime import datetime
+from utils.metagenerator import upload_metadata
 
 # Configure Gemini API Key
 genai.configure(api_key="AIzaSyCNcDqBuahNOVuu7m20r--UKshLYz9uEnk")
@@ -152,3 +153,10 @@ if user_input:
                     st.markdown(f"[🔗 View on IPFS](https://gateway.pinata.cloud/ipfs/{ipfs_hash})")
                 else:
                     st.error("❌ Failed to upload to IPFS.")
+            
+            PINATA_API_KEY = "9a17fbd24197fae05247"
+            PINATA_SECRET = "dbcf4aad6f2f69a99e66aefe0bf32f6f5f64aefe5e9716d728b2b9df130eb5a3y"
+            ENCRYPTED_FILE_PATH = "https://gateway.pinata.cloud/ipfs/{ipfs_hash}"  # Change accordingly
+
+            metadata_url = upload_metadata(ENCRYPTED_FILE_PATH, PINATA_API_KEY, PINATA_SECRET)
+            print("✅ Metadata IPFS URL:",metadata_url)
