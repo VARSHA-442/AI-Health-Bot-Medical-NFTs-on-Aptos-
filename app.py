@@ -109,7 +109,7 @@ def predict_disease(model, input_vector):
 
 
 # Streamlit UI
-st.title("🩺 AI Health Bot + Medical NFTs on Aptos")
+st.title("🩺 AI Health Bot + Medical NFTs")
 
 mode = st.radio("Choose input mode", ("Audio", "Text"))
 
