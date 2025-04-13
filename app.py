@@ -143,7 +143,7 @@ if st.button("🔍 Predict Disease"):
         st.success(summary)
         if st.button("I need suggestion"):
             recommendation=generateSuggestion(symptoms,result)
-            st.success(recommendation)
+        st.success(recommendation)
         with tempfile.NamedTemporaryFile(delete=False, mode="w", suffix=".json") as tmp:
             json.dump(summary, tmp, indent=4)
             tmp_path = tmp.name
