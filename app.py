@@ -12,9 +12,6 @@ import string
 from utils.mint_nft import mint_nft_to_patron
 import tempfile
 from utils.pinata_uploader import upload_to_pinata
-import QRCode
-from PIL import Image
-import io
 
 # ─── Configuration ─────────────────────────────────────────────────────────────
 genai.configure(api_key="AIzaSyCNcDqBuahNOVuu7m20r--UKshLYz9uEnk")
@@ -208,30 +205,3 @@ if st.button("🧬 Mint NFT Now"):
 #         st.code(result["raw_response"], language="text")
 #     if "status_code" in result:
 #         st.write(f"📟 HTTP Status Code: {result['status_code']}")
-
-link = st.text_input(ipfs_hash)
-
-if link:
-    # Generate QR code
-    qr = qrcode.QRCode(
-        version=1,
-        box_size=10,
-        border=5
-    )
-    qr.add_data(link)
-    qr.make(fit=True)
-
-    img = qr.make_image(fill="black", back_color="white")
-
-    # Show QR code
-    st.image(img, caption="Generated QR Code", use_column_width=False)
-
-    # Optional: allow download
-    buf = io.BytesIO()
-    img.save(buf, format="PNG")
-    st.download_button(
-        label="📥 Download QR Code",
-        data=buf.getvalue(),
-        file_name="qr_code.png",
-        mime="image/png"
-    )
