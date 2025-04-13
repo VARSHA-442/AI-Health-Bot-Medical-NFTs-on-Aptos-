@@ -12,7 +12,7 @@ import string
 from utils.mint_nft import mint_nft_to_patron
 import tempfile
 from utils.pinata_uploader import upload_to_pinata
-import qrcode
+import QRCode
 from PIL import Image
 import io
 
