@@ -141,17 +141,17 @@ if st.button("🔍 Predict Disease"):
         summary = generate_medical_summary(symptoms,result)
         summary_json = json.dumps(summary)
         st.success(summary)
-if st.button("I need suggestion"):
-    recommendation=generateSuggestion(symptoms,result)
-    st.write(recommendation)
-with tempfile.NamedTemporaryFile(delete=False, mode="w", suffix=".json") as tmp:
-    json.dump(summary, tmp, indent=4)
-    tmp_path = tmp.name
+
+        with tempfile.NamedTemporaryFile(delete=False, mode="w", suffix=".json") as tmp:
+            json.dump(summary, tmp, indent=4)
+            tmp_path = tmp.name
 
             
             # with open(key_file, "rb") as kf:
             #     st.download_button("🔑 Download Key File", kf.read(), file_name="key.txt")
-
+    if st.button("I need suggestion"):
+        recommendation=generateSuggestion(symptoms,result)
+        st.write(recommendation)
     if st.button("🌐 Upload File to IPFS"):
         st.session_state.upload_clicked = True
 
