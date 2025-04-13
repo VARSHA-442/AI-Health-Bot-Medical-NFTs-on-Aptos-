@@ -5,7 +5,8 @@ import ssl
 
 # from utils.pinata_uploader import upload_to_pinata  # Uncomment when needed
 
-url = "https://your_nft_minting_endpoint"
+url = "https://api.example.com/mint-nft"
+
 headers = {
     "Content-Type": "application/json",
     "Authorization": "Bearer your_token",  # Replace with real token

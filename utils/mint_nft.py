@@ -2,7 +2,8 @@
 import requests
 
 def mint_nft_to_patron(ipfs_hash, wallet_address):
-    url = "https://nft-api.mydomain.com/mint"
+    url = "https://api.example.com/mint-nft"
+
   # Replace with the correct URL
     headers = {
         "Content-Type": "application/json",
