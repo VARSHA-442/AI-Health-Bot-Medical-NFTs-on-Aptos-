@@ -31,8 +31,8 @@ mode = st.radio("Choose input mode", ("Audio", "Text"))
 
 # ─── Audio Input ───────────────────────────────────────────────────────────────
 def audio_input():
-    st.subheader("🎤 Upload a .wav audio file describing your symptoms")
-    uploaded_file = st.file_uploader("Choose a .wav file", type=["wav"])
+    st.subheader("🎤 Upload a .m4a audio file describing your symptoms")
+    uploaded_file = st.file_uploader("Choose a .m4a file", type=["m4a"])
     if uploaded_file:
         st.audio(uploaded_file, format="audio/wav")
         recognizer = sr.Recognizer()
