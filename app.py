@@ -149,19 +149,19 @@ if st.button("🔍 Predict Disease"):
             
             # with open(key_file, "rb") as kf:
             #     st.download_button("🔑 Download Key File", kf.read(), file_name="key.txt")
-    if st.button("I need suggestion"):
-        recommendation=generateSuggestion(symptoms,result)
-        st.write(recommendation)
-    if st.button("🌐 Upload File to IPFS"):
-        st.session_state.upload_clicked = True
+if st.button("I need suggestion"):
+    recommendation=generateSuggestion(symptoms,result)
+    st.write(recommendation)
+if st.button("🌐 Upload File to IPFS"):
+    st.session_state.upload_clicked = True
 
-    if st.session_state.get("upload_clicked"):
-        ipfs_hash = upload_to_pinata(summary_json)
-        if ipfs_hash:
-            st.success("✅ Uploaded to IPFS!")
-            st.markdown(f"[🔗 View on IPFS](https://gateway.pinata.cloud/ipfs/{ipfs_hash})")
-        else:
-            st.error("❌ Failed to upload to IPFS.")
+if st.session_state.get("upload_clicked"):
+    ipfs_hash = upload_to_pinata(summary_json)
+    if ipfs_hash:
+        st.success("✅ Uploaded to IPFS!")
+        st.markdown(f"[🔗 View on IPFS](https://gateway.pinata.cloud/ipfs/{ipfs_hash})")
+    else:
+        st.error("❌ Failed to upload to IPFS.")
 
 
 
