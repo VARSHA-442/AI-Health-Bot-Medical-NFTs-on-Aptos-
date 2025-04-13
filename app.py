@@ -157,11 +157,24 @@ if st.button("🌐 Upload File to IPFS"):
         st.warning("Please generate a medical summary first.")
 
 
+# if st.button("🧬 Mint Health Summary NFT"):
+#     wallet_address = st.text_input("🔐 Enter your Aptos Wallet Address")
+#     ipfs_hash = st.session_state.get("ipfs_hash")
+#     if wallet_address and ipfs_hash:
+#         st.write("NFT MINT started")
+#         result = mint_nft_to_patron(ipfs_hash, wallet_address)
+#         if result.get("success"):
+#             st.success("✅ NFT minted successfully!")
+#             st.markdown(f"[View NFT on Aptos Explorer](https://explorer.aptoslabs.com/account/{wallet_address})")
+#         else:
+#             st.error("❌ Failed to mint NFT")
+#     else:
+#         st.warning("Provide wallet address and upload summary first.")
+
 if st.button("🧬 Mint Health Summary NFT"):
-    wallet_address = st.text_input("🔐 Enter your Aptos Wallet Address")
     ipfs_hash = st.session_state.get("ipfs_hash")
+    wallet_address = st.text_input("🔐 Enter your Aptos Wallet Address")
     if wallet_address and ipfs_hash:
-        st.write("NFT MINT started")
         result = mint_nft_to_patron(ipfs_hash, wallet_address)
         if result.get("success"):
             st.success("✅ NFT minted successfully!")
@@ -169,4 +182,4 @@ if st.button("🧬 Mint Health Summary NFT"):
         else:
             st.error("❌ Failed to mint NFT")
     else:
-        st.warning("Provide wallet address and upload summary first.")
+        st.warning("Make sure the summary is uploaded to IPFS and wallet address is entered.")
