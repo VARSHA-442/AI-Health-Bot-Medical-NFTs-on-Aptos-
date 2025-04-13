@@ -72,10 +72,7 @@ def load_model():
     return model
 
 def generate_medical_summary(symptoms, diagnosis):
-    # 🔹 Generate unique patient ID with timestamp + random 4-char suffix
-    suffix = ''.join(random.choices(string.ascii_lowercase + string.digits, k=4))
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    patient_id = f"user_{timestamp}_{suffix}"
+    
 
     # 🔹 Create summary dictionary
     summary = {
