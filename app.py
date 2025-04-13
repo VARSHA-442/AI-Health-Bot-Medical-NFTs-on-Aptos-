@@ -31,8 +31,8 @@ mode = st.radio("Choose input mode", ("Audio", "Text"))
 
 # ─── Audio Input ───────────────────────────────────────────────────────────────
 def audio_input():
-    st.subheader("🎤 Upload a .m4a audio file describing your symptoms")
-    uploaded_file = st.file_uploader("Choose a .m4a file", type=["m4a"])
+    st.subheader("🎤 Upload a .wav audio file describing your symptoms")
+    uploaded_file = st.file_uploader("Choose a .wav file", type=["wav"])
     if uploaded_file:
         st.audio(uploaded_file, format="audio/wav")
         recognizer = sr.Recognizer()
@@ -205,3 +205,32 @@ if st.button("🧬 Mint NFT Now"):
 #         st.code(result["raw_response"], language="text")
 #     if "status_code" in result:
 #         st.write(f"📟 HTTP Status Code: {result['status_code']}")
+import qrcode
+from PIL import Image
+import io
+link = st.text_input(ipfs_hash)
+
+if link:
+    # Generate QR code
+    qr = qrcode.QRCode(
+        version=1,
+        box_size=10,
+        border=5
+    )
+    qr.add_data(link)
+    qr.make(fit=True)
+
+    img = qr.make_image(fill="black", back_color="white")
+
+    # Show QR code
+    st.image(img, caption="Generated QR Code", use_column_width=False)
+
+    # Optional: allow download
+    buf = io.BytesIO()
+    img.save(buf, format="PNG")
+    st.download_button(
+        label="📥 Download QR Code",
+        data=buf.getvalue(),
+        file_name="qr_code.png",
+        mime="image/png"
+    )
