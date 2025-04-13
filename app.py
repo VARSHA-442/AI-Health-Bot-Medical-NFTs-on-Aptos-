@@ -185,7 +185,7 @@ if st.button("🧬 Mint NFT Now"):
     else:
         st.info("⛏️ Minting your NFT on Aptos... please wait...")
         result = mint_nft_to_patron(ipfs_hash, wallet_address)
-        st.write("🔎 API Response:", result)
+        # st.write("🔎 API Response:", result)
 
         if result.get("success"):
             st.success("✅ NFT minted successfully!")
