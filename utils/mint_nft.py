@@ -1,19 +1,23 @@
+# In utils/mint_nft.py
 import requests
 
-def mint_nft_to_patron(metadata_cid, wallet_address):
-    url = "https://api.patron.ai/v1/nft/mint"  # placeholder, update from docs
-
+def mint_nft_to_patron(ipfs_hash, wallet_address):
+    url = "your_nft_minting_endpoint"  # Replace with the correct URL
     headers = {
-        "Authorization": "Bearer YOUR_PATRON_API_KEY",  # if needed
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Authorization": "Bearer your_token",  # If needed
     }
-
     payload = {
-        "recipient": wallet_address,
-        "metadata_uri": f"https://gateway.pinata.cloud/ipfs/{metadata_cid}",
-        "collection_name": "AIHealthBot",
-        "name": "AI Health Summary",
+        "ipfs_hash": ipfs_hash,
+        "wallet_address": wallet_address
     }
-
-    response = requests.post(url, headers=headers, json=payload)
-    return response.json()
+    
+    # Adding verify=False to bypass SSL certificate verification temporarily
+    response = requests.post(url, headers=headers, json=payload, verify=False)
+    
+    # Check the response and handle it accordingly
+    if response.status_code == 200:
+        return response.json()
+    else:
+        print(f"Error: {response.status_code}")
+        return None
