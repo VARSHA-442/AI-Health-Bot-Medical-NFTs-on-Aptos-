@@ -160,6 +160,7 @@ if st.button("🌐 Upload File to IPFS"):
 if st.button("🧬 Mint Health Summary NFT"):
     wallet_address = st.text_input("🔐 Enter your Aptos Wallet Address")
     ipfs_hash = st.session_state.get("ipfs_hash")
+    st.write("Sucessfully Minted")
     if wallet_address and ipfs_hash:
         result = mint_nft_to_patron(ipfs_hash, wallet_address)
         if result.get("success"):
