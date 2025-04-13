@@ -1,27 +1,23 @@
-# In utils/mint_nft.py
 import requests
-
 def mint_nft_to_patron(ipfs_hash, wallet_address):
-    url = "https://your-backend.com/api/mint"
-
-
-
-  # Replace with the correct URL
+    url = "https://your-backend.com/api/mint"  # Replace with your actual endpoint
     headers = {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer your_token",  # If needed
+        "Content-Type": "application/json"
     }
     payload = {
-        "ipfs_hash": ipfs_hash,
-        "wallet_address": wallet_address
+        "wallet_address": wallet_address,
+        "ipfs_hash": ipfs_hash
     }
-    
-    # Adding verify=False to bypass SSL certificate verification temporarily
-    response = requests.post(url, headers=headers, json=payload, verify=False)
-    
-    # Check the response and handle it accordingly
-    if response.status_code == 200:
-        return response.json()
-    else:
-        print(f"Error: {response.status_code}")
-        return None
+
+    try:
+        response = requests.post(url, headers=headers, json=payload)
+        response.raise_for_status()  # Raise if 4xx or 5xx
+        try:
+            return response.json()  # Try parsing JSON
+        except requests.exceptions.JSONDecodeError:
+            print("Non-JSON response received:")
+            print(response.text)
+            return {"error": "Invalid JSON returned from server"}
+    except requests.exceptions.RequestException as e:
+        print(f"Request failed: {e}")
+        return {"error": str(e)}
