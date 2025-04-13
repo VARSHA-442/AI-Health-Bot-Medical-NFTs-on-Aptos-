@@ -138,15 +138,12 @@ if st.button("🔍 Predict Disease"):
     else:
         result = predict_disease(model, input_vector)
         symptoms=extract_detected_symptoms(symptom_list, input_vector)
+        summary = generate_medical_summary(symptoms,result)
+        summary_json = json.dumps(summary)
+        st.success(summary)
         if st.button("I need suggestion"):
             recommendation=generateSuggestion(symptoms,result)
             st.success(recommendation)
-        summary = generate_medical_summary(symptoms,result)
-
-            
-        summary_json = json.dumps(summary)
-            
-        st.success(summary)
         with tempfile.NamedTemporaryFile(delete=False, mode="w", suffix=".json") as tmp:
             json.dump(summary, tmp, indent=4)
             tmp_path = tmp.name
