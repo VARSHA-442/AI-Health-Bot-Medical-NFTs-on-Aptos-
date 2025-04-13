@@ -191,4 +191,4 @@ if st.button("🧬 Mint NFT Now"):
             st.success("✅ NFT minted successfully!")
             st.markdown(f"[View NFT on Aptos Explorer](https://explorer.aptoslabs.com/account/{wallet_address})")
         else:
-            st.error(f"[View NFT on Aptos Explorer](https://explorer.aptoslabs.com/account/{wallet_address})")
+            st.error("❌ Failed to mint NFT. Check your wallet address or API key.")
