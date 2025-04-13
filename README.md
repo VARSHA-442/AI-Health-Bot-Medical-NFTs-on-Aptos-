@@ -62,6 +62,36 @@
 ---
 
 ## 📁 Project Structure
+ai-health-bot-medical-nfts-on-aptos-
+│
+├── app.py                     # 🎯 Main Streamlit app (UI + logic)
+├── model.pkl                  # 🧠 Trained RandomForestClassifier (770 diseases, 378 symptoms)
+├── requirements.txt           # 📦 List of dependencies
+├── README.md                  # 📄 Full project description
+│
+├── idea/
+│   ├── AI Health Bot.iml         
+│        
+│
+├── dataset/
+│   ├── dataset10.csv           
+│   
+│
+├── model/
+│   ├── model.py   
+│
+├── speech/
+│   ├── speech.py              
+│   
+│
+└── utils/
+    ├── __init__.py 
+    └── mint_nft.py
+    └── pinata_uploader.py
+
+# Deployment link 
+https://hcns9f7q8mkk5sqqbsqzux.streamlit.app/
+
 
 
 
