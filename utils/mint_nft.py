@@ -2,7 +2,7 @@
 import requests
 
 def mint_nft_to_patron(ipfs_hash, wallet_address):
-    url = "your_nft_minting_endpoint"  # Replace with the correct URL
+    url = "https://your_nft_minting_endpoint"  # Replace with the correct URL
     headers = {
         "Content-Type": "application/json",
         "Authorization": "Bearer your_token",  # If needed
