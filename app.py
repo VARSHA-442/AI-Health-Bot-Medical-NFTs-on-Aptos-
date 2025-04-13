@@ -319,10 +319,27 @@ if st.button("I need suggestion"):
     else:
         st.warning("Predict disease first.")
 
+# if st.button("🌐 Upload File to IPFS"):
+#     summary_json = st.session_state.get("summary_json")
+#     if summary_json:
+#         ipfs_hash = upload_to_pinata(summary_json)
+#         if ipfs_hash:
+#             st.session_state.ipfs_hash = ipfs_hash
+#             st.success("✅ Uploaded to IPFS!")
+#             st.markdown(f"[🔗 View on IPFS](https://gateway.pinata.cloud/ipfs/{ipfs_hash})")
+#         else:
+#             st.error("❌ Upload failed.")
+#     else:
+#         st.warning("Please generate a medical summary first.")
+  
 if st.button("🌐 Upload File to IPFS"):
     summary_json = st.session_state.get("summary_json")
     if summary_json:
-        ipfs_hash = upload_to_pinata(summary_json)
+        with tempfile.NamedTemporaryFile(delete=False, mode="w", suffix=".json") as tmp:
+            tmp.write(summary_json)
+            tmp_path = tmp.name
+
+        ipfs_hash = upload_to_pinata(tmp_path)
         if ipfs_hash:
             st.session_state.ipfs_hash = ipfs_hash
             st.success("✅ Uploaded to IPFS!")
@@ -331,6 +348,7 @@ if st.button("🌐 Upload File to IPFS"):
             st.error("❌ Upload failed.")
     else:
         st.warning("Please generate a medical summary first.")
+
 
 if st.button("🧬 Mint Health Summary NFT"):
     wallet_address = st.text_input("🔐 Enter your Aptos Wallet Address")
