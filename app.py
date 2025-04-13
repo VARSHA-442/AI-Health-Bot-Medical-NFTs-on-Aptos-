@@ -12,6 +12,9 @@ import string
 from utils.mint_nft import mint_nft_to_patron
 import tempfile
 from utils.pinata_uploader import upload_to_pinata
+import qrcode
+from PIL import Image
+import io
 
 # ─── Configuration ─────────────────────────────────────────────────────────────
 genai.configure(api_key="AIzaSyCNcDqBuahNOVuu7m20r--UKshLYz9uEnk")
@@ -205,9 +208,7 @@ if st.button("🧬 Mint NFT Now"):
 #         st.code(result["raw_response"], language="text")
 #     if "status_code" in result:
 #         st.write(f"📟 HTTP Status Code: {result['status_code']}")
-import qrcode
-from PIL import Image
-import io
+
 link = st.text_input(ipfs_hash)
 
 if link:
