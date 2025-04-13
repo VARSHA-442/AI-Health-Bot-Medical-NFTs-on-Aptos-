@@ -171,15 +171,24 @@ if st.button("🌐 Upload File to IPFS"):
 #     else:
 #         st.warning("Provide wallet address and upload summary first.")
 
-if st.button("🧬 Mint Health Summary NFT"):
+# 
+st.write("## 🧬 Mint Health Summary NFT")
+
+# Use input *outside* the button block
+wallet_address = st.text_input("🔐 Enter your Aptos Wallet Address")
+if st.button("🧬 Mint NFT Now"):
     ipfs_hash = st.session_state.get("ipfs_hash")
-    wallet_address = st.text_input("🔐 Enter your Aptos Wallet Address")
-    if wallet_address and ipfs_hash:
+    if not ipfs_hash:
+        st.warning("Please upload the file to IPFS first.")
+    elif not wallet_address or not wallet_address.startswith("0x"):
+        st.warning("Please enter a valid wallet address starting with 0x.")
+    else:
+        st.info("⛏️ Minting your NFT on Aptos... please wait...")
         result = mint_nft_to_patron(ipfs_hash, wallet_address)
+        st.write("🔎 API Response:", result)
+
         if result.get("success"):
             st.success("✅ NFT minted successfully!")
             st.markdown(f"[View NFT on Aptos Explorer](https://explorer.aptoslabs.com/account/{wallet_address})")
         else:
-            st.error("❌ Failed to mint NFT")
-    else:
-        st.warning("Make sure the summary is uploaded to IPFS and wallet address is entered.")
+            st.error("❌ Failed to mint NFT. Check your wallet address or API key.")
