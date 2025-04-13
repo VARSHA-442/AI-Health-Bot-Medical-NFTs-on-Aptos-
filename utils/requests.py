@@ -5,7 +5,8 @@ import ssl
 
 # from utils.pinata_uploader import upload_to_pinata  # Uncomment when needed
 
-url = "https://api.nftmintingplatform.com/mint"
+url = "https://your-backend.com/api/mint"
+
 
 headers = {
     "Content-Type": "application/json",
