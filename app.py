@@ -176,19 +176,32 @@ st.write("## 🧬 Mint Health Summary NFT")
 
 # Use input *outside* the button block
 wallet_address = st.text_input("🔐 Enter your Aptos Wallet Address")
-if st.button("🧬 Mint NFT Now"):
-    ipfs_hash = st.session_state.get("ipfs_hash")
-    if not ipfs_hash:
-        st.warning("Please upload the file to IPFS first.")
-    elif not wallet_address or not wallet_address.startswith("0x"):
-        st.warning("Please enter a valid wallet address starting with 0x.")
-    else:
-        st.info("⛏️ Minting your NFT on Aptos... please wait...")
-        result = mint_nft_to_patron(ipfs_hash, wallet_address)
-        st.write("🔎 API Response:", result)
+# if st.button("🧬 Mint NFT Now"):
+#     ipfs_hash = st.session_state.get("ipfs_hash")
+#     if not ipfs_hash:
+#         st.warning("Please upload the file to IPFS first.")
+#     elif not wallet_address or not wallet_address.startswith("0x"):
+#         st.warning("Please enter a valid wallet address starting with 0x.")
+#     else:
+#         st.info("⛏️ Minting your NFT on Aptos... please wait...")
+#         result = mint_nft_to_patron(ipfs_hash, wallet_address)
+#         st.write("🔎 API Response:", result)
 
-        if result.get("success"):
-            st.success("✅ NFT minted successfully!")
-            st.markdown(f"[View NFT on Aptos Explorer](https://explorer.aptoslabs.com/account/{wallet_address})")
-        else:
-            st.error("❌ Failed to mint NFT. Check your wallet address or API key.")
+#         if result.get("success"):
+#             st.success("✅ NFT minted successfully!")
+#             st.markdown(f"[View NFT on Aptos Explorer](https://explorer.aptoslabs.com/account/{wallet_address})")
+#         else:
+#             st.error("❌ Failed to mint NFT. Check your wallet address or API key.")
+result = mint_nft_to_patron(ipfs_hash, wallet_address)
+
+st.write("🔎 API Response:", result)
+
+if result.get("success"):
+    st.success("✅ NFT minted successfully!")
+    st.markdown(f"[🌐 View NFT on Aptos Explorer](https://explorer.aptoslabs.com/account/{wallet_address})")
+else:
+    st.error(f"❌ {result.get('error')}")
+    if "raw_response" in result:
+        st.code(result["raw_response"], language="text")
+    if "status_code" in result:
+        st.write(f"📟 HTTP Status Code: {result['status_code']}")
